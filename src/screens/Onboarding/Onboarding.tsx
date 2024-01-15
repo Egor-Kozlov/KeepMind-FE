@@ -4,9 +4,13 @@ import {StyleSheet, Text, View} from 'react-native';
 export const Onboarding = () => {
   return (
     <View>
-      <Text>Onboarding</Text>
+      <Text style={styles.text}>Onboarding</Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  text: {
+    fontFamily: 'Nunito-Medium',
+  },
+});
