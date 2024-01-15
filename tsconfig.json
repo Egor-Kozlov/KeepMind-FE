@@ -1,3 +1,47 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react-native",
+    "lib": ["es2017"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "strict": true,
+    "target": "esnext",
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"],
+      "@app/components": ["src/components"],
+      "@app/components/*": ["src/components/*"],
+      "@app/core": ["src/core"],
+      "@app/core/*": ["src/core/*"],
+      "@app/hooks": ["src/hooks"],
+      "@app/hooks/*": ["src/hooks/*"],
+      "@app/hocs": ["src/utils/Hocs"],
+      "@app/hocs/*": ["src/utils/Hocs/*"],
+      "@app/utils": ["src/utils"],
+      "@app/utils/*": ["src/utils/*"],
+      "@app/screens": ["src/screens"],
+      "@app/screens/*": ["src/screens/*"],
+      "@app/thirdparty": ["src/thirdparty"],
+      "@app/thirdparty/*": ["src/thirdparty/*"],
+      "@app/types": ["src/types"],
+      "@app/types/*": ["src/types/*"],
+      "@app/assets": ["src/assets"],
+      "@app/assets/*": ["src/assets/*"],
+      "@app/api": ["src/api"],
+      "@app/api/*": ["src/api/*"]
+    }
+  },
+  "typeRoots": ["./app/types"],
+  "exclude": [
+    "app/*/node_modules",
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ]
 }
