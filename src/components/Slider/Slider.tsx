@@ -1,53 +1,36 @@
-import React, {useRef, useState} from 'react';
-import {Animated, FlatList, StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import Animated, {
+  runOnJS,
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from 'react-native-reanimated';
 import Slides from '../../data/onboarding';
 import Pagination from './Pagination';
 import SlideItem from './SlideItem';
 
 export const Slider = () => {
   const [index, setIndex] = useState(0);
-  const scrollX = useRef(new Animated.Value(0)).current;
 
-  const handleOnScroll = event => {
-    Animated.event(
-      [
-        {
-          nativeEvent: {
-            contentOffset: {
-              x: scrollX,
-            },
-          },
-        },
-      ],
-      {
-        useNativeDriver: false,
-      },
-    )(event);
-  };
+  const translationX = useSharedValue(0);
 
-  const handleOnViewableItemsChanged = useRef(({viewableItems}) => {
-    // console.log('viewableItems', viewableItems);
-    setIndex(viewableItems[0].index);
-  }).current;
-
-  const viewabilityConfig = useRef({
-    itemVisiblePercentThreshold: 50,
-  }).current;
+  const scrollHandler = useAnimatedScrollHandler(event => {
+    translationX.value = event.contentOffset.x;
+    runOnJS(setIndex)(Math.round(event.contentOffset.x / 375));
+  });
 
   return (
     <View>
-      <FlatList
+      <Animated.FlatList
         data={Slides}
         renderItem={({item}) => <SlideItem item={item} />}
         horizontal
         pagingEnabled
         snapToAlignment="center"
         showsHorizontalScrollIndicator={false}
-        onScroll={handleOnScroll}
-        onViewableItemsChanged={handleOnViewableItemsChanged}
-        viewabilityConfig={viewabilityConfig}
+        onScroll={scrollHandler}
       />
-      <Pagination data={Slides} scrollX={scrollX} index={index} />
+      <Pagination countOfSlides={Slides.length} scrollX={translationX} />
     </View>
   );
 };

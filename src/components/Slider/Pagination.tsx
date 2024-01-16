@@ -1,42 +1,48 @@
 import React from 'react';
-import {Animated, Dimensions, StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet, View} from 'react-native';
+import Animated, {
+  SharedValue,
+  interpolate,
+  interpolateColor,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 
 const {width} = Dimensions.get('screen');
 
-const Pagination = ({data, scrollX, index}) => {
+type PaginationProps = {
+  countOfSlides: number;
+  scrollX: SharedValue<number | null>;
+};
+
+const Dot = ({
+  scrollX,
+  inputRange,
+}: {
+  scrollX: SharedValue<number | null>;
+  inputRange: number[];
+}) => {
+  const animatedStyle = useAnimatedStyle(() => ({
+    backgroundColor: interpolateColor(scrollX.value ?? 0, inputRange, [
+      '#ccc',
+      '#000',
+      '#ccc',
+    ]),
+    width: interpolate(scrollX.value ?? 0, inputRange, [12, 30, 12], 'clamp'),
+  }));
+
+  return <Animated.View style={[styles.dot, animatedStyle]} />;
+};
+
+const Pagination: React.FC<PaginationProps> = ({countOfSlides, scrollX}) => {
   return (
     <View style={styles.container}>
-      {data.map((_, idx) => {
-        const inputRange = [(idx - 1) * width, idx * width, (idx + 1) * width];
-
-        const dotWidth = scrollX.interpolate({
-          inputRange,
-          outputRange: [12, 30, 12],
-          extrapolate: 'clamp',
-        });
-
-        const opacity = scrollX.interpolate({
-          inputRange,
-          outputRange: [0.2, 1, 0.1],
-          extrapolate: 'clamp',
-        });
-
-        const backgroundColor = scrollX.interpolate({
-          inputRange,
-          outputRange: ['#ccc', '#000', '#ccc'],
-          extrapolate: 'clamp',
-        });
-
-        return (
-          <Animated.View
-            key={idx.toString()}
-            style={[
-              styles.dot,
-              {width: dotWidth, backgroundColor},
-              // idx === index && styles.dotActive,
-            ]}
-          />
-        );
+      {Array.from(Array(countOfSlides).keys()).map((key, index) => {
+        const inputRange = [
+          (index - 1) * width,
+          index * width,
+          (index + 1) * width,
+        ];
+        return <Dot key={key} scrollX={scrollX} inputRange={inputRange} />;
       })}
     </View>
   );
