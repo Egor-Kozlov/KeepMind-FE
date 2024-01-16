@@ -4,13 +4,13 @@ import type {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 
+import {Onboarding} from '@app/screens';
 import type {
   ParamListBase,
   RouteConfig,
   StackNavigationState,
 } from '@react-navigation/core';
 import type {FC} from 'react';
-import {Onboarding} from '../screens/Onboarding';
 
 export type StackRoutesType<ParamList extends ParamListBase> = Array<
   RouteConfig<
