@@ -16,7 +16,7 @@ const moduleResolver = [
     alias: {
       '@app/components': './src/components',
       '@app/hocs': './src/utils/Hocs',
-      '@app/hooks': './src/hooks',
+      '@app/hooks': './src/utils/hooks',
       '@app/utils': './src/utils',
       '@app/screens': './src/screens',
       '@app/core': './src/core',
