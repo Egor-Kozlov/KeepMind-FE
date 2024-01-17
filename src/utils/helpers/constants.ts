@@ -1,13 +1,19 @@
 const DARK_THEME = {
-  background: '#FEFEFE',
+  background: '#141927',
   button: '#21283F',
-  text: '#141927',
+  mainText: '#FEFEFE',
+  secondaryText: '#EBEBF599',
+  paginationActiveDot: '#4870FF',
+  paginationInactiveDot: '#21283F',
 };
 
 const LIGHT_THEME = {
   background: '#FEFEFE',
   button: '#21283F',
-  text: '#141927',
+  mainText: '#FEFEFE',
+  secondaryText: '#EBEBF599',
+  paginationActiveDot: '#4870FF',
+  paginationInactiveDot: '#21283F',
 };
 
 export const COLOR_SCHEME: Record<'dark' | 'light', typeof DARK_THEME> = {

@@ -8,7 +8,8 @@ interface ThemeState {
 const deviceTheme = Appearance.getColorScheme();
 
 const initialState: ThemeState = {
-  theme: deviceTheme,
+  //   theme: deviceTheme || 'dark',
+  theme: 'dark',
 };
 
 const themeSlice = createSlice({

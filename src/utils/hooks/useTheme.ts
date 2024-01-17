@@ -4,7 +4,7 @@ import {COLOR_SCHEME} from '../helpers/constants';
 
 export const useTheme = () => {
   const {theme} = useSelector((state: RootState) => state.theme);
-  const themeColors = COLOR_SCHEME[theme];
+  const themeColors = COLOR_SCHEME[theme || 'dark'];
 
   return {colors: themeColors, theme: theme};
 };

@@ -1,46 +1,22 @@
+import {useTheme} from '@app/hooks';
 import React from 'react';
-import {
-  Animated,
-  Dimensions,
-  Easing,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 
 const {width, height} = Dimensions.get('screen');
 
 const SlideItem = ({item}) => {
-  const translateYImage = new Animated.Value(40);
-
-  Animated.timing(translateYImage, {
-    toValue: 0,
-    duration: 1000,
-    useNativeDriver: true,
-    easing: Easing.bounce,
-  }).start();
+  const {colors} = useTheme();
 
   return (
     <View style={styles.container}>
-      {/* <Animated.Image
-        source={item.img}
-        resizeMode="contain"
-        style={[
-          styles.image,
-          {
-            transform: [
-              {
-                translateY: translateYImage,
-              },
-            ],
-          },
-        ]}
-      /> */}
-
+      <Image source={item.img} resizeMode="contain" style={[styles.image]} />
       <View style={styles.content}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.description}>{item.description}</Text>
-        <Text style={styles.price}>{item.price}</Text>
+        <Text style={[styles.title, {color: colors.mainText}]}>
+          {item.title}
+        </Text>
+        <Text style={[styles.description, {color: colors.secondaryText}]}>
+          {item.description}
+        </Text>
       </View>
     </View>
   );
@@ -53,27 +29,30 @@ const styles = StyleSheet.create({
     width,
     height,
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'blue',
   },
   image: {
-    flex: 0.6,
+    flex: 0.3,
     width: '100%',
   },
   content: {
-    flex: 0.4,
+    height: '50%',
+    borderWidth: 1,
+    borderColor: 'red',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: 'Nunito-Black',
+    textAlign: 'center',
     color: '#333',
   },
   description: {
     fontSize: 18,
     marginVertical: 12,
     color: '#333',
-  },
-  price: {
-    fontSize: 32,
-    fontWeight: 'bold',
+    fontFamily: 'Nunito-Regular',
   },
 });

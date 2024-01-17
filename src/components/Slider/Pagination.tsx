@@ -1,3 +1,4 @@
+import {useTheme} from '@app/hooks';
 import React from 'react';
 import {Dimensions, StyleSheet, View} from 'react-native';
 import Animated, {
@@ -21,11 +22,12 @@ const Dot = ({
   scrollX: SharedValue<number | null>;
   inputRange: number[];
 }) => {
+  const {colors} = useTheme();
   const animatedStyle = useAnimatedStyle(() => ({
     backgroundColor: interpolateColor(scrollX.value ?? 0, inputRange, [
-      '#ccc',
-      '#000',
-      '#ccc',
+      colors.paginationInactiveDot,
+      colors.paginationActiveDot,
+      colors.paginationInactiveDot,
     ]),
     width: interpolate(scrollX.value ?? 0, inputRange, [12, 30, 12], 'clamp'),
   }));
