@@ -20,9 +20,10 @@ export const Slider = () => {
   });
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <Animated.FlatList
         data={Slides}
+        style={{flex: 1}}
         renderItem={({item}) => <SlideItem item={item} />}
         horizontal
         pagingEnabled

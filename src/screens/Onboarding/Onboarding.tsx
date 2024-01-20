@@ -1,17 +1,22 @@
-import {Slider} from '@app/components';
+import {Button, ExternalLogin, Slider} from '@app/components';
 import {useTheme} from '@app/hooks';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 
 export const Onboarding: React.FC = () => {
   const {colors} = useTheme();
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.background}]}>
+    <SafeAreaView
+      style={[styles.container, {backgroundColor: colors.background}]}>
       <View style={styles.sliderContainer}>
         <Slider />
+        <View style={styles.buttonContainer}>
+          <Button title="Next" onPress={() => {}} />
+          <ExternalLogin />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -22,9 +27,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  buttonContainer: {
+    paddingHorizontal: 24,
+  },
   sliderContainer: {
-    maxHeight: '75%',
-    width: '100%',
-    borderWidth: 1,
+    flex: 0.93,
   },
 });

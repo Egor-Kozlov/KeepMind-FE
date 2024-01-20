@@ -8,7 +8,10 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 const Router = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator>
+      <RootStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
         {rootUnauthorizedStackRoutes.map(stackRoute => (
           <RootStack.Screen key={stackRoute.name} {...stackRoute} />
         ))}
