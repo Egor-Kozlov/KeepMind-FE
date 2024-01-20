@@ -9,6 +9,7 @@ type ButtonProps = {
 
 export const Button: React.FC<ButtonProps> = ({title, onPress}) => {
   const {colors} = useTheme();
+
   return (
     <TouchableOpacity
       style={[styles.container, {backgroundColor: colors.button}]}>
