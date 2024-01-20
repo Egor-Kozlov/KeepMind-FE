@@ -1,10 +1,10 @@
+import {DeveloperTool} from '@app/components';
 import React from 'react';
 import {View, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Provider} from 'react-redux';
-import {store} from './src/store/store';
-
 import Router from './src/navigation/router';
+import {store} from './src/store/store';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -22,6 +22,7 @@ function App(): React.JSX.Element {
       /> */}
         <Router />
       </View>
+      <DeveloperTool />
     </Provider>
   );
 }
