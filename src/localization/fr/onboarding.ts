@@ -1,14 +1,15 @@
 export default {
   FIRST_SCREEN: {
-    TITLE: 'Bienvenue',
-    DESCRIPTION: 'Ceci est le premier écran',
+    TITLE: `Commencez à vous concentrer sur ce qui est vraiment important.`,
+    DESCRIPTION: "!wrong L'avenir de la santé est sur votre poignet",
   },
   SECOND_SCREEN: {
-    TITLE: 'Deuxième écran',
-    DESCRIPTION: 'Ceci est le deuxième écran',
+    TITLE: 'Calme de fond',
+    DESCRIPTION:
+      'Une musique spéciale vous aidera à rassembler vos pensées et à vous calmer',
   },
   THIRD_SCREEN: {
-    TITLE: 'Troisième écran',
-    DESCRIPTION: 'Ceci est le troisième écran',
+    TITLE: 'Conquérez les sommets avec vos amis',
+    DESCRIPTION: 'Suivez les progrès de vos amis ou étudiez ensemble',
   },
 };

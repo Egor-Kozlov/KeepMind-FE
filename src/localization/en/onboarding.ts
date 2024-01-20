@@ -1,14 +1,15 @@
 export default {
   FIRST_SCREEN: {
-    TITLE: 'Welcome',
-    DESCRIPTION: 'This is the first screen',
+    TITLE: `Start focusing on what's really important.`,
+    DESCRIPTION: '!wrong The future of health is on your wrist',
   },
   SECOND_SCREEN: {
-    TITLE: 'Second screen',
-    DESCRIPTION: 'This is the second screen',
+    TITLE: 'Background calmness',
+    DESCRIPTION:
+      'Special music will help you collect your thoughts and calm down',
   },
   THIRD_SCREEN: {
-    TITLE: 'Third screen',
-    DESCRIPTION: 'This is the third screen',
+    TITLE: 'Conquer the peaks with your friends',
+    DESCRIPTION: 'Follow the progress of your friends or study together',
   },
 };
