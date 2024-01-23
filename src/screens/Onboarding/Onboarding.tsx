@@ -1,8 +1,9 @@
 import {Button, ExternalLogin, Slider} from '@app/components';
 import {useTheme} from '@app/hooks';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
+import Animated from 'react-native-reanimated';
 import slidesData from '../../data/onboarding';
 
 export const Onboarding: React.FC = () => {
@@ -10,6 +11,13 @@ export const Onboarding: React.FC = () => {
   const {colors} = useTheme();
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const lastSlideIndex = slidesData.length - 1;
+
+  const scrollRef =
+    useRef<Animated.FlatList<(typeof slidesData)[number]>>(null);
+
+  const scrollTo = (index: number) => {
+    scrollRef?.current?.scrollToIndex({index});
+  };
 
   const onCurrentSlideIndexChange = (index: number) => {
     setCurrentSlideIndex(index);
@@ -31,13 +39,23 @@ export const Onboarding: React.FC = () => {
       style={[styles.container, {backgroundColor: colors.background}]}>
       <View style={styles.sliderContainer}>
         <Slider
+          ref={scrollRef}
           slidesData={generateSlidesContent()}
           setCurrentSlideIndex={onCurrentSlideIndexChange}
         />
         <View style={styles.buttonContainer}>
           <Button
-            title={currentSlideIndex === lastSlideIndex ? 'Finish' : 'Next'}
-            onPress={() => {}}
+            title={
+              currentSlideIndex === lastSlideIndex
+                ? t('onboarding:START_BUTTON')
+                : t('onboarding:NEXT_BUTTON')
+            }
+            onPress={() => {
+              if (currentSlideIndex === lastSlideIndex) {
+                return;
+              }
+              scrollTo(currentSlideIndex + 1);
+            }}
           />
           <ExternalLogin />
         </View>

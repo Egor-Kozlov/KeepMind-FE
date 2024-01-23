@@ -11,4 +11,6 @@ export default {
     TITLE: 'Zdobądź szczyty ze swoimi przyjaciółmi',
     DESCRIPTION: 'Obserwuj postępy swoich przyjaciół lub ucz się razem',
   },
+  NEXT_BUTTON: 'Następny',
+  START_BUTTON: 'Rozpocznij podróż',
 };

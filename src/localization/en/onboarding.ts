@@ -12,4 +12,6 @@ export default {
     TITLE: 'Conquer the peaks with your friends',
     DESCRIPTION: 'Follow the progress of your friends or study together',
   },
+  NEXT_BUTTON: 'Next',
+  START_BUTTON: 'Start the journey',
 };

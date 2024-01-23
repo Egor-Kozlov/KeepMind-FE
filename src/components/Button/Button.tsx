@@ -12,6 +12,7 @@ export const Button: React.FC<ButtonProps> = ({title, onPress}) => {
 
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={[styles.container, {backgroundColor: colors.button}]}>
       <Text style={[styles.text, {color: colors.mainText}]}>{title}</Text>
     </TouchableOpacity>
