@@ -10,7 +10,6 @@ export const Languages = () => {
   };
   const languagesList = Object.values(LanguagesSet);
   const currentLanguage = i18n.language;
-  console.log('currentLanguage: ', currentLanguage);
 
   return (
     <View style={styles.container}>
@@ -18,7 +17,10 @@ export const Languages = () => {
       <View style={styles.listContainer}>
         {languagesList.map((lng: string) => (
           <TouchableOpacity
-            style={[styles.button]}
+            style={[
+              styles.button,
+              {backgroundColor: lng === currentLanguage ? '#ccc' : '#fff'},
+            ]}
             onPress={() => changeLanguage(lng)}
             key={lng}
             activeOpacity={0.8}>

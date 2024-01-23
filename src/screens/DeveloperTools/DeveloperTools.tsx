@@ -1,3 +1,4 @@
+import {CloseButton} from '@app/components';
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Languages} from './Components';
@@ -6,6 +7,7 @@ export const DeveloperTools = () => {
   return (
     <View>
       <Text style={styles.title}>Developer Tools</Text>
+      <CloseButton />
       <ScrollView>
         <View style={styles.section}>
           <Languages />
