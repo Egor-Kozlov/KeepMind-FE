@@ -27,6 +27,7 @@
     "reset-cache": "watchman watch-del-all && react-native start --reset-cache"
   },
   "dependencies": {
+    "@react-native-firebase/analytics": "^18.7.3",
     "@react-native-firebase/app": "^18.7.3",
     "@react-native-google-signin/google-signin": "^11.0.0",
     "@react-navigation/bottom-tabs": "^6.5.11",

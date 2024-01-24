@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "227577949523",
+    "project_id": "keepmind-8de58",
+    "storage_bucket": "keepmind-8de58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227577949523:android:e64ae3ab99d4d594c285a6",
+        "android_client_info": {
+          "package_name": "com.keepmind"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUg63PA0U8HSW6Gj2LLvR9zsv9lDeWCKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
