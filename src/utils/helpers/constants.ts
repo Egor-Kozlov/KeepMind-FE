@@ -1,6 +1,7 @@
 const DARK_THEME = {
   background: '#141927',
   button: '#21283F',
+  buttonText: '#FEFEFE',
   mainText: '#FEFEFE',
   secondaryText: '#EBEBF599',
   paginationActiveDot: '#4870FF',
@@ -9,9 +10,10 @@ const DARK_THEME = {
 
 const LIGHT_THEME = {
   background: '#FEFEFE',
-  button: '#21283F',
-  mainText: '#FEFEFE',
-  secondaryText: '#EBEBF599',
+  button: '#4870FF',
+  buttonText: '#FEFEFE',
+  mainText: '#141927',
+  secondaryText: '#21283F',
   paginationActiveDot: '#4870FF',
   paginationInactiveDot: '#21283F',
 };

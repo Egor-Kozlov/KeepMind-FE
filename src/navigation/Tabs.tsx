@@ -1,13 +1,16 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import {rootTabsRoutes} from '@app/types';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React from 'react';
 
 const Tabs = () => {
-  return (
-    <View>
-      <Text>Tabs</Text>
-    </View>
-  )
-}
+  const Tab = createBottomTabNavigator();
 
-export default Tabs
+  return (
+    <Tab.Navigator>
+      {rootTabsRoutes.map(tabRoute => (
+        <Tab.Screen key={tabRoute.name} {...tabRoute} />
+      ))}
+    </Tab.Navigator>
+  );
+};
+export default Tabs;

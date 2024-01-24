@@ -11,6 +11,7 @@ import type {
   StackNavigationState,
 } from '@react-navigation/core';
 import type {FC} from 'react';
+import Tabs from '../navigation/Tabs';
 
 export type StackRoutesType<ParamList extends ParamListBase> = Array<
   RouteConfig<
@@ -26,12 +27,26 @@ export enum SCREEN_NAMES {
   ONBOARDING = 'Onboarding',
   HOME = 'Home',
   DEVELOPER_TOOLS = 'DeveloperTools',
+  GAME = 'Game',
+  FEED = 'Feed',
+  PROFILE = 'Profile',
+  TABS = 'Tabs',
+}
+
+export enum TABS_STACK_NAMES {
+  GAME = 'Game',
+  FEED = 'Feed',
+  PROFILE = 'Profile',
 }
 
 export type RootStackParamList = {
   [SCREEN_NAMES.ONBOARDING]: undefined;
   [SCREEN_NAMES.HOME]: undefined;
   [SCREEN_NAMES.DEVELOPER_TOOLS]: undefined;
+  [SCREEN_NAMES.GAME]: undefined;
+  [SCREEN_NAMES.FEED]: undefined;
+  [SCREEN_NAMES.PROFILE]: undefined;
+  [SCREEN_NAMES.TABS]: undefined;
 };
 
 type RootStackRoutesType = StackRoutesType<RootStackParamList>;
@@ -50,6 +65,45 @@ export const rootUnauthorizedStackRoutes: RootStackRoutesType = [
     },
   },
 ];
+
+export const rootAuthorizedStackRoutes: RootStackRoutesType = [
+  {
+    name: SCREEN_NAMES.TABS,
+    component: Tabs as FC,
+    options: {
+      headerShown: false,
+    },
+  },
+];
+
+// export const FeedStackRoutes: RootStackRoutesType = [
+//   {
+//     name: SCREEN_NAMES.FEED,
+//     component: Feed as FC,
+//   },
+// ];
+
+// export const ProfileStackRoutes: RootStackRoutesType = [
+//   {
+//     name: SCREEN_NAMES.PROFILE,
+//     component: Profile as FC,
+//   },
+// ];
+
+// export const rootTabsRoutes: RootStackRoutesType = [
+//   {
+//     name: TABS_STACK_NAMES.GAME,
+//     component: Game as FC,
+//   },
+//   {
+//     name: TABS_STACK_NAMES.FEED,
+//     component: Feed as FC,
+//   },
+//   {
+//     name: TABS_STACK_NAMES.PROFILE,
+//     component: Profile as FC,
+//   },
+// ];
 
 declare global {
   namespace ReactNavigation {

@@ -6,13 +6,17 @@ import {View} from 'react-native';
 
 import {
   RootStackParamList,
-  rootUnauthorizedStackRoutes,
   SCREEN_NAMES,
+  rootAuthorizedStackRoutes,
+  rootUnauthorizedStackRoutes,
 } from '@app/types';
-const RootStack = createNativeStackNavigator<RootStackParamList>();
 
-const Router = () => {
-  const navigationRef = React.useRef(null);
+const Router: React.FC = () => {
+  const RootStack = createNativeStackNavigator<RootStackParamList>();
+
+  const [isAuthorized, setIsAuthorized] = React.useState(false);
+
+  const navigationRef = React.useRef<any>(null);
   return (
     <View style={{flex: 1}}>
       <NavigationContainer ref={navigationRef}>
@@ -20,9 +24,13 @@ const Router = () => {
           screenOptions={{
             headerShown: false,
           }}>
-          {rootUnauthorizedStackRoutes.map(stackRoute => (
-            <RootStack.Screen key={stackRoute.name} {...stackRoute} />
-          ))}
+          {isAuthorized
+            ? rootAuthorizedStackRoutes.map(stackRoute => (
+                <RootStack.Screen key={stackRoute.name} {...stackRoute} />
+              ))
+            : rootUnauthorizedStackRoutes.map(stackRoute => (
+                <RootStack.Screen key={stackRoute.name} {...stackRoute} />
+              ))}
         </RootStack.Navigator>
       </NavigationContainer>
       <DeveloperTool

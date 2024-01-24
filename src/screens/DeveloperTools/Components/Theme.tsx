@@ -1,32 +1,25 @@
+import {useTheme} from '@app/hooks';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {LanguagesSet} from '../../../localization/i18n';
-export const Theme = () => {
-  const {t, i18n} = useTranslation();
+import {StyleSheet, Switch, Text, View} from 'react-native';
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
+export const Theme = () => {
+  const {onChangeTheme, theme} = useTheme();
+
+  const changeTheme = () => {
+    onChangeTheme(theme === 'light' ? 'dark' : 'light');
   };
-  const languagesList = Object.values(LanguagesSet);
-  const currentLanguage = i18n.language;
 
   return (
     <View style={styles.container}>
       <Text>Current theme:</Text>
       <View style={styles.listContainer}>
-        {languagesList.map((lng: string) => (
-          <TouchableOpacity
-            style={[
-              styles.button,
-              {backgroundColor: lng === currentLanguage ? '#ccc' : '#fff'},
-            ]}
-            onPress={() => changeLanguage(lng)}
-            key={lng}
-            activeOpacity={0.8}>
-            <Text key={lng}>{lng}</Text>
-          </TouchableOpacity>
-        ))}
+        <Text>Light</Text>
+        <Switch
+          style={{marginHorizontal: 10}}
+          value={theme === 'dark'}
+          onValueChange={changeTheme}
+        />
+        <Text>Dark</Text>
       </View>
     </View>
   );
@@ -40,7 +33,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
     flex: 1,
