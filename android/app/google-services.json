@@ -12,7 +12,20 @@
           "package_name": "com.keepmind"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "227577949523-ig6bl43167qt8t9dha6q6ts5o72cmsq9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.keepmind",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "227577949523-6eesdie8bccamh2e9k9ul5bj2es70g3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCUg63PA0U8HSW6Gj2LLvR9zsv9lDeWCKE"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227577949523-6eesdie8bccamh2e9k9ul5bj2es70g3d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "227577949523-s2fnk7j1g1qkbe8t5oqagqi1ilpn18b4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.KeepMind"
+              }
+            }
+          ]
         }
       }
     }
