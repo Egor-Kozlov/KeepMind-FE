@@ -27,7 +27,7 @@ export const Slider: React.FC<SliderProps> = forwardRef(
     });
 
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 0.97}}>
         <Animated.FlatList
           ref={ref}
           data={slidesData}

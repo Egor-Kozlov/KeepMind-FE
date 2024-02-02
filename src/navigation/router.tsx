@@ -1,9 +1,11 @@
 import {DeveloperTool} from '@app/components';
+import {StorageKeys} from '@app/utils/mmkv';
 import analytics from '@react-native-firebase/analytics';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
+import {useMMKVString} from 'react-native-mmkv';
 
 import {
   RootStackParamList,
@@ -20,24 +22,7 @@ const Router: React.FC = () => {
       null,
     );
 
-  // Set an initializing state whilst Firebase connects
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
-
-  // // Handle user state changes
-  // function onAuthStateChanged(user) {
-  //   setUser(user);
-  //   if (initializing) setInitializing(false);
-  // }
-
-  // useEffect(() => {
-  //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-  //   return subscriber; // unsubscribe on unmount
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log('USER', user);
-  // }, [user]);
+  const [onboardingCompleted] = useMMKVString(StorageKeys.onboardingCompleted);
 
   return (
     <View style={{flex: 1}}>
@@ -47,6 +32,7 @@ const Router: React.FC = () => {
           routeNameRef.current = navigationRef.current.getCurrentRoute().name;
         }}
         onStateChange={async () => {
+          //for screen tracking
           const previousRouteName = routeNameRef.current;
           const currentRouteName = navigationRef.current.getCurrentRoute().name;
 
@@ -62,7 +48,7 @@ const Router: React.FC = () => {
           screenOptions={{
             headerShown: false,
           }}>
-          {user
+          {!onboardingCompleted
             ? rootAuthorizedStackRoutes.map(stackRoute => (
                 <RootStack.Screen key={stackRoute.name} {...stackRoute} />
               ))

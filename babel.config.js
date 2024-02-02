@@ -22,7 +22,7 @@ const moduleResolver = [
       '@app/core': './src/core',
       '@app/thirdparty': './src/thirdparty',
       '@app/types': './src/types',
-      '@app/assets': '.src/assets',
+      '@app/assets': './src/assets',
       '@app/api': './src/api',
     },
   },

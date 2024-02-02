@@ -1,16 +1,31 @@
-import {Button, ExternalLogin, Slider} from '@app/components';
+import {Button, Slider} from '@app/components';
 import {useTheme} from '@app/hooks';
+import {StorageKeys, setItem} from '@app/utils/mmkv';
 import React, {useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import Animated from 'react-native-reanimated';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Animated, {FadeIn, FadeOut} from 'react-native-reanimated';
+import {useSelector} from 'react-redux';
 import slidesData from '../../data/onboarding';
+import {RootState} from '../../store/store';
+
+const AnimatedTouchableOpacity =
+  Animated.createAnimatedComponent(TouchableOpacity);
 
 export const Onboarding: React.FC = () => {
+  const {name, avatarUrl} = useSelector((state: RootState) => state.user);
+
   const {t} = useTranslation();
   const {colors} = useTheme();
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const lastSlideIndex = slidesData.length - 1;
+  const isLastSlide = currentSlideIndex >= lastSlideIndex;
 
   const scrollRef =
     useRef<Animated.FlatList<(typeof slidesData)[number]>>(null);
@@ -34,6 +49,10 @@ export const Onboarding: React.FC = () => {
     });
   };
 
+  const finishOnboarding = () => {
+    setItem(StorageKeys.onboardingCompleted, 'true');
+  };
+
   return (
     <SafeAreaView
       style={[styles.container, {backgroundColor: colors.background}]}>
@@ -43,21 +62,46 @@ export const Onboarding: React.FC = () => {
           slidesData={generateSlidesContent()}
           setCurrentSlideIndex={onCurrentSlideIndexChange}
         />
-        <View style={styles.buttonContainer}>
+        <View style={styles.bottomContainer}>
           <Button
             title={
-              currentSlideIndex === lastSlideIndex
+              isLastSlide
                 ? t('onboarding:START_BUTTON')
                 : t('onboarding:NEXT_BUTTON')
             }
             onPress={() => {
-              if (currentSlideIndex === lastSlideIndex) {
-                return;
+              if (isLastSlide) {
+                finishOnboarding();
+              } else {
+                scrollTo(currentSlideIndex + 1);
               }
-              scrollTo(currentSlideIndex + 1);
             }}
           />
-          <ExternalLogin />
+
+          <View style={styles.skipContainer}>
+            {!isLastSlide && (
+              <AnimatedTouchableOpacity
+                onPress={() => {
+                  scrollTo(lastSlideIndex);
+                  // playVibration('soft');
+                }}
+                entering={FadeIn}
+                exiting={FadeOut}
+                hitSlop={15}>
+                <Text style={styles.skipText}>
+                  {t('onboarding:SKIP_BUTTON')}
+                </Text>
+              </AnimatedTouchableOpacity>
+            )}
+          </View>
+
+          {/* <View style={styles.signinContainer}>
+            {!name ? (
+              <User name={name} avatarUrl={avatarUrl} />
+            ) : (
+              <ExternalLogin />
+            )}
+          </View> */}
         </View>
       </View>
     </SafeAreaView>
@@ -71,10 +115,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  buttonContainer: {
+  bottomContainer: {
+    alignItems: 'center',
     paddingHorizontal: 24,
   },
   sliderContainer: {
-    flex: 0.93,
+    flex: 1,
+  },
+  signinContainer: {
+    marginTop: 24,
+  },
+  skipContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 24,
+    height: 22,
+  },
+  skipText: {
+    fontFamily: 'Nunito-Regular',
+    fontSize: 16,
+    color: '#A1A4B2',
   },
 });

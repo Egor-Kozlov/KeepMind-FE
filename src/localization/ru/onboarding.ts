@@ -13,5 +13,6 @@ export default {
     DESCRIPTION: 'Следите за успехами своих друзей или учитесь вместе',
   },
   NEXT_BUTTON: 'Далее',
+  SKIP_BUTTON: 'Пропустить',
   START_BUTTON: 'Начать путешествие',
 };

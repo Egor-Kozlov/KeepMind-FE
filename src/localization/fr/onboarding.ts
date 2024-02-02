@@ -13,5 +13,6 @@ export default {
     DESCRIPTION: 'Suivez les progrès de vos amis ou étudiez ensemble',
   },
   NEXT_BUTTON: 'Suivant',
+  SKIP_BUTTON: 'Passer',
   START_BUTTON: 'Commencer le voyage',
 };

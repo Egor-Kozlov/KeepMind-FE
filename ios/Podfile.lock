@@ -1262,6 +1262,8 @@ PODS:
     - React-Core
   - RNLocalize (3.0.6):
     - React-Core
+  - RNReactNativeHapticFeedback (2.2.0):
+    - React-Core
   - RNReanimated (3.6.2):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1360,6 +1362,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - RNLocalize (from `../node_modules/react-native-localize`)
+  - RNReactNativeHapticFeedback (from `../node_modules/react-native-haptic-feedback`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -1511,6 +1514,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-google-signin/google-signin"
   RNLocalize:
     :path: "../node_modules/react-native-localize"
+  RNReactNativeHapticFeedback:
+    :path: "../node_modules/react-native-haptic-feedback"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -1606,6 +1611,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: 25b969a1ffc806b9f9ad2e170d4a3b049c6af85e
   RNGoogleSignin: fc408799f1990a12497a32f64280c0fe353ffcc1
   RNLocalize: 4222a3756cdbe2dc9a5bdf445765a4d2572107cb
+  RNReactNativeHapticFeedback: ec56a5f81c3941206fd85625fa669ffc7b4545f9
   RNReanimated: 5589be82dc26b3f94738eb7c6b1f942787532b25
   RNScreens: b582cb834dc4133307562e930e8fa914b8c04ef2
   RNSVG: ba3e7232f45e34b7b47e74472386cf4e1a676d0a

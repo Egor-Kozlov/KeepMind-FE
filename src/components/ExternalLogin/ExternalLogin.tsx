@@ -1,15 +1,21 @@
+import AppleLogo from '@app/assets/icons/apple-logo';
 import {useTheme} from '@app/hooks';
 import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import AppleLogo from '../../assets/icons/apple-logo';
 import onGoogleButtonPress from '../../thirdparty/googleAuth';
 
 export const ExternalLogin = () => {
-  const {colors} = useTheme();
+  const {colors, theme} = useTheme();
+
+  const googleButtonColor =
+    theme === 'dark'
+      ? GoogleSigninButton.Color.Light
+      : GoogleSigninButton.Color.Dark;
+
   return (
-    <View>
-      <TouchableOpacity style={styles.container}>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.appleButton}>
         <View style={styles.iconContainer}>
           <AppleLogo height="100%" width={30} />
         </View>
@@ -19,7 +25,7 @@ export const ExternalLogin = () => {
       </TouchableOpacity>
       <GoogleSigninButton
         size={GoogleSigninButton.Size.Wide}
-        color={GoogleSigninButton.Color.Dark}
+        color={googleButtonColor}
         onPress={onGoogleButtonPress}
         // disabled={isInProgress}
       />
@@ -28,13 +34,15 @@ export const ExternalLogin = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 24,
-    height: 40,
-    paddingVertical: 3,
+  container: {},
+  appleButton: {
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'black',
+    borderRadius: 8,
+    height: 40,
+    marginBottom: 16,
   },
   text: {
     fontFamily: 'Nunito-Bold',
