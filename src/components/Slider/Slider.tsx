@@ -9,16 +9,16 @@ import Slides from '../../data/onboarding';
 import Pagination from './Pagination';
 import SlideItem from './SlideItem';
 
+type FlatListRef = React.Ref<Animated.FlatList<(typeof Slides)[number]>>;
+
 type SliderProps = {
   slidesData: typeof Slides;
   setCurrentSlideIndex: (index: number) => void;
+  ref: FlatListRef;
 };
 
 export const Slider: React.FC<SliderProps> = forwardRef(
-  (
-    {slidesData, setCurrentSlideIndex},
-    ref: React.Ref<Animated.FlatList<(typeof Slides)[number]>>,
-  ) => {
+  ({slidesData, setCurrentSlideIndex}, ref: FlatListRef) => {
     const translationX = useSharedValue(0);
 
     const scrollHandler = useAnimatedScrollHandler(event => {

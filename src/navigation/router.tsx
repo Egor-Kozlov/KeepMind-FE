@@ -1,8 +1,8 @@
 import {DeveloperTool} from '@app/components';
-import auth from '@react-native-firebase/auth';
+import analytics from '@react-native-firebase/analytics';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 
 import {
@@ -15,29 +15,49 @@ import {
 const Router: React.FC = () => {
   const RootStack = createNativeStackNavigator<RootStackParamList>();
   const navigationRef = React.useRef<any>(null);
+  const routeNameRef =
+    React.useRef<ReturnType<typeof navigationRef.current.getCurrentRoute>>(
+      null,
+    );
 
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  // Handle user state changes
-  function onAuthStateChanged(user) {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  }
+  // // Handle user state changes
+  // function onAuthStateChanged(user) {
+  //   setUser(user);
+  //   if (initializing) setInitializing(false);
+  // }
 
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return subscriber; // unsubscribe on unmount
-  }, []);
+  // useEffect(() => {
+  //   const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+  //   return subscriber; // unsubscribe on unmount
+  // }, []);
 
-  useEffect(() => {
-    console.log('USER', user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log('USER', user);
+  // }, [user]);
 
   return (
     <View style={{flex: 1}}>
-      <NavigationContainer ref={navigationRef}>
+      <NavigationContainer
+        ref={navigationRef}
+        onReady={() => {
+          routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+        }}
+        onStateChange={async () => {
+          const previousRouteName = routeNameRef.current;
+          const currentRouteName = navigationRef.current.getCurrentRoute().name;
+
+          if (previousRouteName !== currentRouteName) {
+            await analytics().logScreenView({
+              screen_name: currentRouteName,
+              screen_class: currentRouteName,
+            });
+          }
+          routeNameRef.current = currentRouteName;
+        }}>
         <RootStack.Navigator
           screenOptions={{
             headerShown: false,
