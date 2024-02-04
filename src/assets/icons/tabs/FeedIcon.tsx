@@ -1,6 +1,6 @@
-import {Path, Svg} from '@app/components';
 import * as React from 'react';
 import Animated from 'react-native-reanimated';
+import Svg, {Path} from 'react-native-svg';
 
 const AnimatedG = Animated.createAnimatedComponent(Path);
 

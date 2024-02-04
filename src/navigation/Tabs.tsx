@@ -15,49 +15,20 @@ const Tabs: React.FC = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        tabBarIcon: ({focused}) => {
+        tabBarIcon: ({color}) => {
+          console.log('11color: ', color);
           if (route.name === 'Feed') {
-            return (
-              <TabIcon
-                name="Feed"
-                Icon={FeedIcon}
-                focused={focused}
-                fillActive={colors.tabIconActive}
-                fillInactive={colors.tabIconInactive}
-              />
-            );
+            return <TabIcon Icon={FeedIcon} fill={color} />;
           } else if (route.name === 'CreatePost') {
-            return (
-              <TabIcon
-                name="CreatePost"
-                Icon={CreatePostIcon}
-                focused={focused}
-                fillActive={colors.tabIconActive}
-                fillInactive={colors.tabIconInactive}
-              />
-            );
+            return <TabIcon Icon={CreatePostIcon} fill={color} />;
           } else if (route.name === 'Profile') {
-            return (
-              <TabIcon
-                name="Profile"
-                Icon={ProfileIcon}
-                focused={focused}
-                fillActive={colors.tabIconActive}
-                fillInactive={colors.tabIconInactive}
-              />
-            );
+            return <TabIcon Icon={ProfileIcon} fill={color} />;
           } else if (route.name === 'Game') {
-            return (
-              <TabIcon
-                name="Game"
-                Icon={GameIcon}
-                focused={focused}
-                fillActive={colors.tabIconActive}
-                fillInactive={colors.tabIconInactive}
-              />
-            );
+            return <TabIcon Icon={GameIcon} fill={color} />;
           }
         },
+        tabBarActiveTintColor: colors.tabIconActive,
+        tabBarInactiveTintColor: colors.tabIconInactive,
       })}>
       {tabStackRoutes.map(tabRoute => (
         <Tab.Screen key={tabRoute.name} {...tabRoute} />

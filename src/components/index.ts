@@ -1,4 +1,3 @@
-export * from './AnimatedSvg';
 export * from './Button';
 export * from './CloseButton';
 export * from './DeveloperTool';
