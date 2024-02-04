@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 type Props = {
-  Icon: React.FC<any>;
+  Icon: any;
   fill: string;
 };
 

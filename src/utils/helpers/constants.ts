@@ -7,7 +7,10 @@ const DARK_THEME = {
   paginationActiveDot: '#4870FF',
   paginationInactiveDot: '#21283F',
   tabIconActive: '#4870FF',
-  tabIconInactive: '#8E8E93',
+  tabIconInactive: '#e0e0e0',
+  tabsBackground: '#21283F',
+  setTimerArrow: '#4870FF',
+  setTimerArrowDisabled: '#21283F',
 };
 
 const LIGHT_THEME = {
@@ -20,6 +23,9 @@ const LIGHT_THEME = {
   paginationInactiveDot: '#21283F',
   tabIconActive: '#4870FF',
   tabIconInactive: '#8E8E93',
+  tabsBackground: '#FEFEFE',
+  setTimerArrow: '#21283F',
+  setTimerArrowDisabled: '#EBEBF599',
 };
 
 export const COLOR_SCHEME: Record<'dark' | 'light', typeof DARK_THEME> = {

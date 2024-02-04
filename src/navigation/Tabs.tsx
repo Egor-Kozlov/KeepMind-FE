@@ -8,6 +8,19 @@ import {TabStackParamList, tabStackRoutes} from '@app/types';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 
+const tabIconSwitch = (tabName: string) => {
+  switch (tabName) {
+    case 'Feed':
+      return FeedIcon;
+    case 'CreatePost':
+      return CreatePostIcon;
+    case 'Profile':
+      return ProfileIcon;
+    case 'Game':
+      return GameIcon;
+  }
+};
+
 const Tabs: React.FC = () => {
   const Tab = createBottomTabNavigator<TabStackParamList>();
   const {colors} = useTheme();
@@ -15,17 +28,15 @@ const Tabs: React.FC = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
+        headerStyle: {
+          backgroundColor: colors.tabsBackground,
+        },
+        tabBarStyle: {
+          backgroundColor: colors.tabsBackground,
+          height: 83,
+        },
         tabBarIcon: ({color}) => {
-          console.log('11color: ', color);
-          if (route.name === 'Feed') {
-            return <TabIcon Icon={FeedIcon} fill={color} />;
-          } else if (route.name === 'CreatePost') {
-            return <TabIcon Icon={CreatePostIcon} fill={color} />;
-          } else if (route.name === 'Profile') {
-            return <TabIcon Icon={ProfileIcon} fill={color} />;
-          } else if (route.name === 'Game') {
-            return <TabIcon Icon={GameIcon} fill={color} />;
-          }
+          return <TabIcon Icon={tabIconSwitch(route.name)} fill={color} />;
         },
         tabBarActiveTintColor: colors.tabIconActive,
         tabBarInactiveTintColor: colors.tabIconInactive,
