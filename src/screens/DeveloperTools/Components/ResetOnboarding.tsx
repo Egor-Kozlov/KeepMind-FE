@@ -1,8 +1,13 @@
+import {StorageKeys, setItem} from '@app/utils/mmkv';
 import React from 'react';
 import {Alert, Button, StyleSheet, Text, View} from 'react-native';
 
 export const ResetOnboarding = () => {
-  const onResetOnboarding = () => {
+  const resetOnboarding = () => {
+    setItem(StorageKeys.onboardingCompleted, 'false');
+  };
+
+  const onReset = () => {
     Alert.alert(
       'Reset Onboarding',
       'Are you sure you want to reset onboarding?',
@@ -13,9 +18,7 @@ export const ResetOnboarding = () => {
         },
         {
           text: 'Reset',
-          onPress: () => {
-            // reset onboarding
-          },
+          onPress: () => resetOnboarding(),
         },
       ],
       {cancelable: false},
@@ -26,7 +29,7 @@ export const ResetOnboarding = () => {
     <View style={styles.container}>
       <Text>Reset Onboarding</Text>
       <View style={{flex: 1}}>
-        <Button title="Reset" onPress={onResetOnboarding} />
+        <Button title="Reset" onPress={onReset} />
       </View>
     </View>
   );

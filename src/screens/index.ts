@@ -1,3 +1,4 @@
+export * from './CreatePost';
 export * from './DeveloperTools';
 export * from './Feed';
 export * from './Game';

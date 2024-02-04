@@ -10,8 +10,9 @@ import {useMMKVString} from 'react-native-mmkv';
 import {
   RootStackParamList,
   SCREEN_NAMES,
-  rootAuthorizedStackRoutes,
-  rootUnauthorizedStackRoutes,
+  onboardingStackRoutes,
+  rootStackRoutes,
+  tabsRootStackRoutes,
 } from '@app/types';
 
 const Router: React.FC = () => {
@@ -23,6 +24,7 @@ const Router: React.FC = () => {
     );
 
   const [onboardingCompleted] = useMMKVString(StorageKeys.onboardingCompleted);
+  const isOnboardingCompleted = onboardingCompleted === 'true';
 
   return (
     <View style={{flex: 1}}>
@@ -48,13 +50,16 @@ const Router: React.FC = () => {
           screenOptions={{
             headerShown: false,
           }}>
-          {!onboardingCompleted
-            ? rootAuthorizedStackRoutes.map(stackRoute => (
+          {isOnboardingCompleted
+            ? tabsRootStackRoutes.map(stackRoute => (
                 <RootStack.Screen key={stackRoute.name} {...stackRoute} />
               ))
-            : rootUnauthorizedStackRoutes.map(stackRoute => (
+            : onboardingStackRoutes.map(stackRoute => (
                 <RootStack.Screen key={stackRoute.name} {...stackRoute} />
               ))}
+          {rootStackRoutes.map(stackRoute => (
+            <RootStack.Screen key={stackRoute.name} {...stackRoute} />
+          ))}
         </RootStack.Navigator>
       </NavigationContainer>
       <DeveloperTool

@@ -4,7 +4,19 @@ import type {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 
-import {DeveloperTools, Onboarding} from '@app/screens';
+import type {
+  BottomTabNavigationEventMap,
+  BottomTabNavigationOptions,
+} from '@react-navigation/bottom-tabs';
+
+import {
+  CreatePost,
+  DeveloperTools,
+  Feed,
+  Game,
+  Onboarding,
+  Profile,
+} from '@app/screens';
 import type {
   ParamListBase,
   RouteConfig,
@@ -23,39 +35,47 @@ export type StackRoutesType<ParamList extends ParamListBase> = Array<
   >
 >;
 
+export type TabRoutesType<ParamList extends ParamListBase> = Array<
+  RouteConfig<
+    ParamList,
+    keyof ParamList,
+    StackNavigationState<ParamList>,
+    BottomTabNavigationOptions,
+    BottomTabNavigationEventMap
+  >
+>;
+
 export enum SCREEN_NAMES {
   ONBOARDING = 'Onboarding',
   HOME = 'Home',
   DEVELOPER_TOOLS = 'DeveloperTools',
-  GAME = 'Game',
-  FEED = 'Feed',
-  PROFILE = 'Profile',
   TABS = 'Tabs',
 }
 
 export enum TABS_STACK_NAMES {
   GAME = 'Game',
   FEED = 'Feed',
+  CREATE_POST = 'CreatePost',
   PROFILE = 'Profile',
 }
 
 export type RootStackParamList = {
-  [SCREEN_NAMES.ONBOARDING]: undefined;
-  [SCREEN_NAMES.HOME]: undefined;
   [SCREEN_NAMES.DEVELOPER_TOOLS]: undefined;
-  [SCREEN_NAMES.GAME]: undefined;
-  [SCREEN_NAMES.FEED]: undefined;
-  [SCREEN_NAMES.PROFILE]: undefined;
+  [SCREEN_NAMES.ONBOARDING]: undefined;
   [SCREEN_NAMES.TABS]: undefined;
 };
 
-type RootStackRoutesType = StackRoutesType<RootStackParamList>;
+export type TabStackParamList = {
+  [TABS_STACK_NAMES.GAME]: undefined;
+  [TABS_STACK_NAMES.FEED]: undefined;
+  [TABS_STACK_NAMES.CREATE_POST]: undefined;
+  [TABS_STACK_NAMES.PROFILE]: undefined;
+};
 
-export const rootUnauthorizedStackRoutes: RootStackRoutesType = [
-  {
-    name: SCREEN_NAMES.ONBOARDING,
-    component: Onboarding as FC,
-  },
+type RootStackRoutesType = StackRoutesType<RootStackParamList>;
+type TabStackRoutesType = TabRoutesType<TabStackParamList>;
+
+export const rootStackRoutes: RootStackRoutesType = [
   {
     name: SCREEN_NAMES.DEVELOPER_TOOLS,
     component: DeveloperTools as FC,
@@ -66,44 +86,66 @@ export const rootUnauthorizedStackRoutes: RootStackRoutesType = [
   },
 ];
 
-export const rootAuthorizedStackRoutes: RootStackRoutesType = [
+export const onboardingStackRoutes: RootStackRoutesType = [
   {
-    name: SCREEN_NAMES.TABS,
-    component: Tabs as FC,
-    options: {
-      headerShown: false,
-    },
+    name: SCREEN_NAMES.ONBOARDING,
+    component: Onboarding as FC,
   },
 ];
 
-// export const FeedStackRoutes: RootStackRoutesType = [
-//   {
-//     name: SCREEN_NAMES.FEED,
-//     component: Feed as FC,
-//   },
-// ];
+//just tab page
+export const tabsRootStackRoutes: RootStackRoutesType = [
+  {
+    name: SCREEN_NAMES.TABS,
+    component: Tabs as FC,
+  },
+];
 
-// export const ProfileStackRoutes: RootStackRoutesType = [
-//   {
-//     name: SCREEN_NAMES.PROFILE,
-//     component: Profile as FC,
-//   },
-// ];
+export const tabStackRoutes: TabStackRoutesType = [
+  {
+    name: TABS_STACK_NAMES.FEED,
+    component: Feed as FC,
+  },
 
-// export const rootTabsRoutes: RootStackRoutesType = [
-//   {
-//     name: TABS_STACK_NAMES.GAME,
-//     component: Game as FC,
-//   },
-//   {
-//     name: TABS_STACK_NAMES.FEED,
-//     component: Feed as FC,
-//   },
-//   {
-//     name: TABS_STACK_NAMES.PROFILE,
-//     component: Profile as FC,
-//   },
-// ];
+  {
+    name: TABS_STACK_NAMES.CREATE_POST,
+    component: CreatePost as FC,
+  },
+  {
+    name: TABS_STACK_NAMES.GAME,
+    component: Game as FC,
+  },
+  {
+    name: TABS_STACK_NAMES.PROFILE,
+    component: Profile as FC,
+  },
+];
+
+//stacks of each tab
+export const ProfileTabStackRoutes: TabStackRoutesType = [
+  {
+    name: TABS_STACK_NAMES.PROFILE,
+    component: Tabs as FC,
+  },
+];
+export const GameTabStackRoutes: TabStackRoutesType = [
+  {
+    name: TABS_STACK_NAMES.GAME,
+    component: Tabs as FC,
+  },
+];
+export const FeedTabStackRoutes: TabStackRoutesType = [
+  {
+    name: TABS_STACK_NAMES.FEED,
+    component: Tabs as FC,
+  },
+];
+export const CreatePostTabStackRoutes: TabStackRoutesType = [
+  {
+    name: TABS_STACK_NAMES.CREATE_POST,
+    component: Tabs as FC,
+  },
+];
 
 declare global {
   namespace ReactNavigation {
