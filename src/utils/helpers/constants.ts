@@ -6,6 +6,8 @@ const DARK_THEME = {
   secondaryText: '#EBEBF599',
   paginationActiveDot: '#4870FF',
   paginationInactiveDot: '#21283F',
+  tabIconActive: '#4870FF',
+  tabIconInactive: '#8E8E93',
 };
 
 const LIGHT_THEME = {
@@ -16,6 +18,8 @@ const LIGHT_THEME = {
   secondaryText: '#21283F',
   paginationActiveDot: '#4870FF',
   paginationInactiveDot: '#21283F',
+  tabIconActive: '#4870FF',
+  tabIconInactive: '#8E8E93',
 };
 
 export const COLOR_SCHEME: Record<'dark' | 'light', typeof DARK_THEME> = {
