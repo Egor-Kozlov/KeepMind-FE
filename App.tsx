@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, useColorScheme} from 'react-native';
+import {useColorScheme} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Provider} from 'react-redux';
 import './src/localization/i18n';
@@ -15,9 +16,9 @@ function App(): React.JSX.Element {
 
   return (
     <Provider store={store}>
-      <View style={{flex: 1}}>
+      <GestureHandlerRootView style={{flex: 1}}>
         <Router />
-      </View>
+      </GestureHandlerRootView>
     </Provider>
   );
 }

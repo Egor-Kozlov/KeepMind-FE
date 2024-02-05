@@ -12,7 +12,7 @@ const ButtonUp: React.FC<Props> = ({onPress, disabled}) => {
   const {colors} = useTheme();
 
   return (
-    <TouchableOpacity onPress={onPress} hitSlop={3} disabled={disabled}>
+    <TouchableOpacity onPress={onPress} hitSlop={3}>
       <ArrowUp
         width={50}
         height={50}

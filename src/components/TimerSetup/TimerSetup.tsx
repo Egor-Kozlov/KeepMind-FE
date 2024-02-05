@@ -1,40 +1,68 @@
+import {CommonButton} from '@app/components';
+import handleTime from '@app/utils/functions/handleTime';
+import playVibration from '@app/utils/playVibration';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import ButtonUp from './ButtonUp';
 
 export const TimerSetup = () => {
   const [time, setTime] = useState('00:20:00');
-  const isTimeMin = time === '00:00:00';
+  const isMinToStart = time === '00:10:00';
 
-  const handleTime = (direction: 'inc' | 'dec', countOfMins = 5) => {
-    const [hours, mins, secs] = time.split(':').map(Number);
-    let newTime = 0;
-    if (direction === 'inc') {
-      newTime = hours * 3600 + mins * 60 + secs + countOfMins * 60;
-    } else {
-      newTime = hours * 3600 + mins * 60 + secs - countOfMins * 60;
+  const onHandleTime = (type: 'inc' | 'dec') => {
+    if (isMinToStart && type === 'dec') {
+      playVibration('rigid');
+      shakeTimerAnimation();
+      return;
     }
-    if (newTime < 0) {
-      newTime = 0;
-    }
-    const newHours = Math.floor(newTime / 3600);
-    const newMins = Math.floor((newTime - newHours * 3600) / 60);
-    const newSecs = newTime - newHours * 3600 - newMins * 60;
-    setTime(
-      `${newHours.toString().padStart(2, '0')}:${newMins
-        .toString()
-        .padStart(2, '0')}:${newSecs.toString().padStart(2, '0')}`,
+    playVibration('soft');
+    handleTime(type, 5, time, setTime);
+  };
+  // Animation for shake
+  const offset = useSharedValue(0);
+  const styleShake = useAnimatedStyle(() => ({
+    transform: [{translateX: offset.value}],
+  }));
+
+  const OFFSET = 5;
+  const TIME = 70;
+
+  const shakeTimerAnimation = () => {
+    offset.value = withSequence(
+      // start from -OFFSET
+      withTiming(-OFFSET, {duration: TIME / 2}),
+      // shake between -OFFSET and OFFSET 5 times
+      withRepeat(withTiming(OFFSET, {duration: TIME}), 5, true),
+      // go back to 0 at the end
+      withTiming(0, {duration: TIME / 2}),
     );
   };
 
   return (
     <View style={styles.container}>
-      <View style={[styles.arrowContainerRotate, styles.arrowContainer]}>
-        <ButtonUp onPress={() => handleTime('dec')} disabled={isTimeMin} />
+      <View style={styles.timerContainer}>
+        <View style={[styles.arrowContainerRotate, styles.arrowContainer]}>
+          <ButtonUp
+            onPress={() => onHandleTime('dec')}
+            disabled={isMinToStart}
+          />
+        </View>
+        <Animated.View style={styleShake}>
+          <Text style={styles.timer}>{time}</Text>
+        </Animated.View>
+        <View style={[styles.arrowContainer]}>
+          <ButtonUp onPress={() => onHandleTime('inc')} />
+        </View>
       </View>
-      <Text style={styles.timer}>{time}</Text>
-      <View style={[styles.arrowContainer]}>
-        <ButtonUp onPress={() => handleTime('inc')} />
+      <View>
+        <CommonButton />
       </View>
     </View>
   );
@@ -44,10 +72,13 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  timerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
   },
   timer: {
-    borderWidth: 1,
     width: 150,
     fontSize: 25,
     margin: 10,
