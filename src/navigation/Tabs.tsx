@@ -7,6 +7,7 @@ import {useTheme} from '@app/hooks';
 import {TabStackParamList, tabStackRoutes} from '@app/types';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
+import {StyleSheet} from 'react-native';
 
 const tabIconSwitch = (tabName: string) => {
   switch (tabName) {
@@ -33,7 +34,8 @@ const Tabs: React.FC = () => {
         },
         tabBarStyle: {
           backgroundColor: colors.tabsBackground,
-          height: 83,
+          height: 80,
+          borderTopWidth: StyleSheet.hairlineWidth,
         },
         tabBarIcon: ({color}) => {
           return <TabIcon Icon={tabIconSwitch(route.name)} fill={color} />;
